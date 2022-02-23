@@ -15,6 +15,7 @@ FROM GENERATE_SERIES(1, current_setting('my.number_of_products')::int) as id;
 INSERT INTO users
 select id
      , concat('User ', id)
+     , concat('email ', id)
 FROM GENERATE_SERIES(1, current_setting('my.number_of_users')::int) as id;
 
 INSERT INTO orders
