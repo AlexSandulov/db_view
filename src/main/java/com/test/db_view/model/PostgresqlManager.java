@@ -41,7 +41,6 @@ public class PostgresqlManager implements DbManager {
 
         String createTable = ("CREATE TABLE " + tableName + "("+ Arrays.toString(columnName.toArray()).
                 replace("[", "").replace("]", "") +")");
-
                 try (
                 Connection connection = ConnectionPool.getConnection()
         ) {
