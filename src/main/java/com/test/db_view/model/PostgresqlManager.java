@@ -4,6 +4,7 @@ import com.test.db_view.controller.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PostgresqlManager implements DbManager {
@@ -31,16 +32,23 @@ public class PostgresqlManager implements DbManager {
     @Override
     public String createTable(List<String> data) {
         String tableName = data.get(0);
-        String columnName = data.get(1);
-        String createTableQuery = ("CREATE TABLE " + tableName + " ( " + columnName + " VARCHAR ) ");
+        List<String> columnName = new ArrayList<>();
+        data.remove(0);
 
-        try (
+        for (String temp : data){
+            columnName.add(temp + " VARCHAR");
+        }
+
+        String createTable = ("CREATE TABLE " + tableName + "("+ Arrays.toString(columnName.toArray()).
+                replace("[", "").replace("]", "") +")");
+                try (
                 Connection connection = ConnectionPool.getConnection()
         ) {
-            connection.createStatement().executeUpdate(createTableQuery);
+            connection.createStatement().executeUpdate(createTable);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return "New table " + tableName + " was successfully created";
     }
 }
