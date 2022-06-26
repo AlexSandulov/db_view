@@ -35,20 +35,20 @@ public class PostgresqlManager implements DbManager {
         List<String> columnName = new ArrayList<>();
         data.remove(0);
 
-        for (String temp : data){
+        for (String temp : data) {
             columnName.add(temp + " VARCHAR");
         }
 
-        String createTable = ("CREATE TABLE " + tableName + "("+ Arrays.toString(columnName.toArray()).
-                replace("[", "").replace("]", "") +")");
-                try (
-                Connection connection = ConnectionPool.getConnection()
+        String createTable = ("CREATE TABLE " + tableName + "(" + Arrays.toString(columnName.toArray()).
+                replace("[", "").replace("]", "") + ")");
+        try (
+                Connection connection = ConnectionPool.getConnection();
+                Statement statement = connection.createStatement()
         ) {
-            connection.createStatement().executeUpdate(createTable);
+            statement.executeUpdate(createTable);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return "New table " + tableName + " was successfully created";
+        return String.format("New table %s was successfully created", tableName);
     }
 }
