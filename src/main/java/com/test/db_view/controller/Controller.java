@@ -21,6 +21,11 @@ public class Controller {
         commands.add(new TablesCommand(dbManager, view));
         commands.add(new CreateCommand(dbManager, view));
         commands.add(new ExitCommand(view));
+        commands.add(new ClearCommand(dbManager, view));
+        commands.add(new DropCommand(dbManager, view));
+        commands.add(new FindCommand(dbManager, view));
+        commands.add(new HelpCommand(view));
+        commands.add(new InsertCommand(dbManager, view));
     }
 
     public void run() {
@@ -41,5 +46,6 @@ public class Controller {
             input = view.read();
         }
         view.write("Work with this app has been stopped");
+        System.exit(0);
     }
 }

@@ -8,6 +8,7 @@ public class MainClass {
 
     //connect => connect | retaildb | postgres | PostgresPassword
     //create => create | tableName | column1 | column2 | ... | columnN
+    //insert => insert | users | user_id | 12313212 | name | userTest1 | email | user1@test.com
 
     static String userDb = "postgres";
     static String password = "PostgresPassword";
